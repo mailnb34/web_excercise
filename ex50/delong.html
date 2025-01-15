@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <script>
+            function regis() 
+            {
+                alert("Registration Successful");
+            }
+        </script>
+    </head>
+
+    <body bgcolor="#66FFFF">
+        <form>
+            <h1 align="center"><img src="DeLong.jpg"></h1>
+            <h2>Travel Expense Report</h2>
+            <hr/>
+
+            <p>1) First Name: <input size=15> Last Name: <input size=15> </p>
+            <p>2) Social Security Number: <input size=15></p>
+            <p>3) Department:
+                <select>
+                    <option>Accounting
+                    <option>Management
+                </select>
+            </p>
+
+            <p>4) Describe the purpose of your trip.<br>
+                &nbsp;<br>
+                <textarea rows="5" cols="50"></textarea>
+            </p>
+
+            </p>5) Itemize your travel expenses</p>
+            <table border>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+
+                <tr>
+                    <td><input value="mm/dd/yyyy"></td>
+                    <td><input></td>
+
+                    <td><select>
+                        <option>Meals</option>
+                        <option>Transportation</option>
+                    </select></td>
+
+                    <td><input></td>
+                </tr>
+
+                <tr>
+                    <td><input value="mm/dd/yyyy"></td>
+                    <td><input></td>
+
+                    <td><select>
+                        <option>Meals</option>
+                        <option>Transportation</option>
+                    </select></td>
+
+                    <td><input></td>
+                </tr>
+
+                <tr>
+                    <td><input value="mm/dd/yyyy"></td>
+                    <td><input></td>
+
+                    <td><select>
+                        <option>Meals</option>
+                        <option>Transportation</option>
+                    </select></td>
+
+                    <td><input></td>
+                </tr>
+
+                <tr>
+                    <td><input value="mm/dd/yyyy"></td>
+                    <td><input></td>
+
+                    <td><select>
+                        <option>Meals</option>
+                        <option>Transportation</option>
+                    </select></td>
+
+                    <td><input></td>
+                </tr>
+
+            </table>
+
+            <p>6) Have you submitted your receipts?
+                <input type="radio">Yes
+                <input type="radio">No
+            </p>
+
+            <p>
+                <input onclick=regis() type="submit" value="Submit travel expenses">
+                <input type="reset" value="Reset">
+            </p>
+
+            <p>Questions? Contact Debbie Larson in Accounting (ext. 2150).</p>
+
+        </form>
+
+    </body>
+
+</html>
