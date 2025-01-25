@@ -1,22 +1,90 @@
 <html>
     <head>
+        <style>
+            th{
+                background-color: blue;
+                color:white;
+            }
+
+            #membersTable{ 
+    border-collapse:collapse; }
+
+#membersTable td, #membersTable th {
+    font-size: 12pt;
+    border:1px solid #030200; 
+    padding:3px 7px 2px 7px;}
+
+
+
+        </style>
+
+        <script>
+            function StartForm() {
+                document.member.name.focus();
+            }
+        </script>
     </head>
 
-    <body>
+    <body onload="StartForm();">
         <h1>Member Registration</h1>
         <hr/>
 
-        <form>
-            <table>
+        <form name="member">
+            <table id="info">
                 <tr>
                     <td>Name(*)</td>
-                    <td><input></td>
+                    <td><input name="name"></td>
                 </tr>
+
+
 
                 <tr>
                     <td>Birthday(*)</td>
-                    <td></td>
+                    <td>
+
+                        <select name="day">
+                            <option value="">Day</option>
+                            <!-- Tạo danh sách từ 1 đến 31 -->
+                            <script>
+                                for (let i = 1; i <= 31; i++) {
+                                    document.write(`<option value="${i}">${i}</option>`);
+                                }
+                            </script>
+                        </select>
+                
+                        <select name="month">
+                            <option value="">Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                
+                        <select name="year">
+                            <option value="">Year</option>
+                            <!-- Tạo danh sách từ 1900 đến năm hiện tại -->
+                            <script>
+                                let year = new Date().getFullYear();
+                                for (let i = year; i >= 1900; i--) {
+                                    document.write(`<option value="${i}">${i}</option>`);
+                                }
+                            </script>
+                        </select>
+
+
+                    </td>
                 </tr>
+
+
+
 
                 <tr>
                     <td>Gender(*)</td>
@@ -43,11 +111,11 @@
 
                 <tr>
                     <td>Your favorite color:<br>
-                    <input type="radio"><label style="background-color: blue;">Blue</label><br>
-                    <input type="radio"><label style="background-color: red;">Red</label><br>
-                    <input type="radio"><label style="background-color: yellow;">Yellow</label><br>
-                    <input type="radio"><label style="background-color: green;">Green</label><br>
-                    <input type="radio"><label style="background-color: violet;">Violet</label><br>
+                    <input type="radio" name="color"><label style="background-color: blue;">Blue</label><br>
+                    <input type="radio" name="color"><label style="background-color: red;">Red</label><br>
+                    <input type="radio" name="color"><label style="background-color: yellow;">Yellow</label><br>
+                    <input type="radio" name="color"><label style="background-color: green;">Green</label><br>
+                    <input type="radio" name="color"><label style="background-color: violet;">Violet</label><br>
                     </td>
                 </tr>
 
@@ -59,6 +127,53 @@
             </table>
         </form>
 
+
+        <table id="membersTable" style="border: 1px solid black; border-collapse: collapse;  width: 500px;">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Birthday</th>
+                    <th>Hobbies</th>
+                    <th>Colors</th>
+                </tr>
+
+                <tr onmouseover="changeYellow(this)" onmouseout="changeWhite(this)">
+                    <td>John</td>
+                    <td>john@gmail.com</td>
+                    <td>Man</td>
+                    <td>02/02/1990</td>
+                    <td>Reading</td>
+                    <td>Yellow</td>
+                </tr>
+                <tr onmouseover="changeYellow(this)" onmouseout="changeWhite(this)">
+                    <td>Peter</td>
+                    <td>peter@gmail.com</td>
+                    <td>Man</td>
+                    <td>01/01/1992</td>
+                    <td>Chat, reading</td>
+                    <td>Red</td>
+                </tr>
+                <tr onmouseover="changeYellow(this)" onmouseout="changeWhite(this)">
+                    <td>Lucy</td>
+                    <td>lucy@gmail.com</td>
+                    <td>Woman</td>
+                    <td>01/02/2005</td>
+                    <td>listening, Chat</td>
+                    <td>Violet</td>
+                </tr>
+
+        </table>
+    
+<script>
+    function changeYellow(tr){
+            tr.style.backgroundColor = "yellow"
+        }
+
+        function changeWhite(tr){
+            tr.style.backgroundColor = "white"
+        }
+    </script>
 
     </body>
 </html>
