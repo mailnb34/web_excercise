@@ -1,0 +1,78 @@
+<html>
+    <head>
+
+        <style>
+    
+            table tr:hover {
+                background-color:blue;
+                color:white;
+                cursor:pointer }
+    
+                table{
+                    width: 500px;
+                }
+    
+                </style>
+
+        <script>
+            var txt="<student>";
+            txt +="<id>987456</id>";
+            txt +="<name>Marie Curie </name>";
+            txt +="<birthday>7/11/1867</birthday>";
+            txt +="<gender>Woman</gender>";    
+            txt +="</student>"
+        </script>
+    </head>
+
+    <body>
+        <table border="1">
+            <tr>
+                <td colspan="2" align="center" style="background-color: lightgreen;">Student Information</td>
+            </tr>
+
+            <tr>
+                <td>Student ID:</td>
+                <td id="student_id"></td>
+            </tr>
+
+            <tr>
+                <td>Student Name:</td>
+                <td id="student_name"></td>
+            </tr>
+
+            <tr>
+                <td>Birthday:</td>
+                <td id="student_birthday"></td>
+            </tr>
+
+            <tr>
+                <td>Gender:</td>
+                <td id="student_gender"></td>
+            </tr>
+
+        </table>
+
+        <script>
+            function info()
+            {
+                var Parser =  new DOMParser();
+                var xmlDOC=Parser.parseFromString(txt,"text/xml");
+                id=xmlDOC.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                name=xmlDOC.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                birthday=xmlDOC.getElementsByTagName("birthday")[0].childNodes[0].nodeValue;
+                gender=xmlDOC.getElementsByTagName("gender")[0].childNodes[0].nodeValue;
+            
+                student_id=document.getElementById("student_id")
+                student_id.innerText=id
+                student_name=document.getElementById("student_name")
+                student_name.innerText=name
+                student_birthday=document.getElementById("student_birthday")
+                student_birthday.innerText=birthday
+                student_gender=document.getElementById("student_gender")
+                student_gender.innerText=gender
+            }
+
+            info()
+        </script>
+    </body>
+</html>
