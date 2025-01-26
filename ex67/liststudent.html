@@ -1,0 +1,107 @@
+<html>
+    <head>
+
+        <script>
+            var dataset="<students>";
+
+                dataset+="<student>";
+                dataset+=  "<id>987456</id>";
+                dataset+=  "<name> Marie Curie </name>";
+                dataset+=  "<birthday>7/11/1867</birthday>";
+                dataset+=   "<gender> Woman </gender>";
+                dataset+="</student>";
+
+                dataset+="<student>";
+                dataset+=  "<id>987561</id>";
+                dataset+=  "<name> Einstein </name>";
+                dataset+=  "<birthday>14/3/1879</birthday>";
+                dataset+=  "<gender>Man</gender>";
+                dataset+="</student>";
+
+                dataset+="<student>";
+                dataset+=  "<id>985467</id>";
+                dataset+=   "<name> Leó Szilárd </name>";
+                dataset+=   "<birthday>11/2/1898</birthday>";
+                dataset+=  "<gender> Man </gender>";
+                dataset+="</student>";
+
+                dataset+="</students>"
+        </script>
+    </head>
+
+    <body>
+        <h1>Student Information</h1>
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Birthday</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbodystudent">
+
+            </tbody>
+
+        </table>
+
+        <script>
+            function load_student() {
+                //Nạp mô hình XML DOM
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(dataset,"text/xml");
+                students=xmlDoc.getElementsByTagName("student")
+
+                for(i=0;i<students.length;i++) {
+                    sti=students[i]
+                    id=sti.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                    name=sti.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                    birthday=sti.getElementsByTagName("birthday")[0].childNodes[0].nodeValue;
+                    gender=sti.getElementsByTagName("gender")[0].childNodes[0].nodeValue;
+
+                    //Xử lý HTML DOM
+                    tbodystudent=document.getElementById("tbodystudent")
+                    tr=document.createElement("tr")
+                    tbodystudent.appendChild(tr)
+
+                    tdid=document.createElement("td")
+                    tdid.innerText=id
+
+                    tdname=document.createElement("td")
+                    tdname.innerText=name
+
+                    tdbirthday=document.createElement("td")
+                    tdbirthday.innerText=birthday
+
+                    tdgender=document.createElement("td")
+                    tdgender.innerText=gender
+
+                tr.appendChild(tdid)
+                tr.appendChild(tdname)
+                tr.appendChild(tdbirthday)
+                tr.appendChild(tdgender)
+
+
+                tr.addEventListener("click",e => {
+                    link="detail.html?id=" + id + "&name=" + name + "&birthday=" + birthday + "&gender=" + gender
+                    window.open(link) 
+                });
+          
+                }
+            }
+
+
+
+            load_student()
+
+
+
+        </script>
+
+    </body>
+</html>
+
+
