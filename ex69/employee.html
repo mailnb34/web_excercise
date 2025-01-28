@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-align: left;
+        }
+        th, td {
+            padding: 8px;
+        }
+    </style>
+    <script>
+        function loadXMLDoc(filename, callback) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    callback(this);
+                }
+            };
+            xhttp.open("GET", filename, true);
+            xhttp.send();
+        }
+        function initialize() {
+            loadXMLDoc("employ.xml", function (xml) {
+                var xmlDoc = xml.responseXML;
+                var employees = xmlDoc.getElementsByTagName("employee");
+                var uniqueTitles = new Set();
+                for (var i = 0; i < employees.length; i++) {
+                    uniqueTitles.add(employees[i].getAttribute("title"));
+                }
+                var droplist = document.getElementById("titleDropdown");
+                uniqueTitles.forEach(function (title) {
+                    var option = document.createElement("option");
+                    option.value = title;
+                    option.textContent = title;
+                    droplist.appendChild(option);
+                });
+                droplist.addEventListener("change", function () {
+                    var selectedTitle = this.value;
+                    displayEmployees(xmlDoc, selectedTitle);
+                });
+            });
+        }
+        function displayEmployees(xmlDoc, title) {
+            var tableBody = document.getElementById("employeeTableBody");
+            tableBody.innerHTML = "";
+            var employees = xmlDoc.getElementsByTagName("employee");
+            for (var i = 0; i < employees.length; i++) {
+                if (employees[i].getAttribute("title") === title) {
+                    var empId = employees[i].getAttribute("id");
+                    var empName = employees[i].getElementsByTagName("name")[0].textContent;
+                    var empPhone = employees[i].getElementsByTagName("phone")[0].textContent;
+                    var row = document.createElement("tr");
+                    var cellId = document.createElement("td");
+                    cellId.textContent = empId;
+                    row.appendChild(cellId);
+                    var cellName = document.createElement("td");
+                    cellName.textContent = empName;
+                    row.appendChild(cellName);
+                    var cellPhone = document.createElement("td");
+                    cellPhone.textContent = empPhone;
+                    row.appendChild(cellPhone);
+                    tableBody.appendChild(row);
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="initialize()">
+    <h1>Employee List</h1>
+    <label for="titleDropdown">Title:</label>
+    <select id="titleDropdown">
+        <option value="" selected disabled>-- Select Title --</option>
+    </select>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="employeeTableBody"></tbody>
+    </table>
+</body>
+</html>
